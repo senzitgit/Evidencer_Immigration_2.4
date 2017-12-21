@@ -1,0 +1,182 @@
+<html lang="en" class="app">
+   <head>
+      <meta charset="utf-8" />
+      <title>Evidencer | View Demo</title>
+      <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+      <link rel="stylesheet" href="css/app.v1.css" type="text/css" />
+      <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+      <link rel="icon" href="favicon.ico" type="image/x-icon">
+      <link href="css/style.css" rel='stylesheet' type='text/css' />
+      <link href="css/responsive.css" rel='stylesheet' type='text/css' />
+      <script src="js/1.11.1/jquery.min.js"></script>
+      <script src="js/Controllers/webServerService.js"></script>
+   </head>
+   <body Style="background-color:white;background-image:url('images/bg4_01.jpg');background-repeat:no-repeat; background-size:   cover;                      /* <------ */
+      background-repeat: no-repeat;
+      background-position: center center;"  >
+      <section class="vbox">
+         <section id="content">
+            <section class="vbox">
+               <section class="scrollable wrapper w-f">
+                  <div class="row">
+                     <div class="col-lg-6">
+                        <div id="mainWrap" style="display:block;">
+                           <div class="login-form">
+                              <center>
+                                 <img src="images/logo_white_new.png" height="180px" class="logImg" alt=""/>
+                                 <div id="msg_box" style="display:none;color:#fff;font-size:10px;"></div>
+                              </center>
+                              <form data-validate="parsley" id="first_frm"  name="first_frm" method="post" action="javascript:void(0)">
+                                 <div class="row">
+                                    <div class="createAc">
+                                       <h2 class="" style=" color: #fff;
+                                          font-size: 25px;
+                                          padding-bottom: 8px;
+                                          font-weight: 400;">
+                                          <div class="fa fa-user"></div>
+                                          &nbsp;&nbsp;&nbsp;Evidencer Demo
+                                       </h2>
+                                    </div>
+                                    <br>
+                                    <div class="col-lg-6">
+                                       <input type="text" name="fullname" id="fullname" placeholder="Full Name"  pattern="[a-zA-Z ]+"  style="width:100%"  data-required="true" autocomplete="off" >
+                                    </div>
+                                    <div class="col-lg-6">
+                                       <input type="text" name="company" id="company" placeholder="Company Name"  pattern="[a-zA-Z ]+" data-required="true" autocomplete="off"  style="width:100%;"><br><br>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-lg-6">
+                                       <input type="text" name="designation" id="designation" placeholder="Designation"  pattern="[a-zA-Z ]+"  style="width:100%"  data-required="true" autocomplete="off" >
+                                    </div>
+                                    <div class="col-lg-6">
+                                       <input type="text" name="country" id="country" placeholder="Country Name"  pattern="[a-zA-Z ]+"  style="width:100%"  data-required="true" autocomplete="off" >
+                                    </div>
+                                 </div><br>
+                                 
+                                 <div class="row">
+                                    <div class="col-lg-6">
+                                       <input type="text" name="mobile" id="mobile" placeholder="Mobile Number" data-required="true" data-type="number"  autocomplete="off" style="width:100%">
+                                    </div>
+                                    <div class="col-lg-6">
+                                       <input type="text" name="email" id="email" placeholder="Email Address" data-required="true" data-type="email" autocomplete="off" style="width:100%" ><br><br>
+                                    </div>
+                                 </div>
+                                 <div class="col-lg-12" style="margin-bottom:30px">
+                                    <font color="white" size="1" style="italic">* All Fields are Mandatory</font>
+                                 </div>
+                                 <div class="button-bottom">
+                                    <div class="button">
+                                       <span class="tick"> </span>
+                                       <input type="submit" value="SUBMIT" id="firstSubmit" />	
+                                       <label style="color:#fff;">
+                                          <a href="index.html">
+                                             <font color="white">
+                                                <div class="fa fa-chevron-left"></div>
+                                                Back To Login 
+                                             </font>
+                                          </a>
+                                       </label>
+                                    </div>
+                                    <div class="clear"> </div>
+                                 </div>
+                              </form>
+                              
+                                    <div id="imageLoader" style="display:none;color:white"> <center><h3>Please Wait...</h3></center><br></div>
+                              
+                              
+                           </div>
+                        </div>
+                        <script>
+                        
+                		$(document).ready(function(){
+    
+                	$("#first_frm").submit(function(){
+                			
+                		
+                		var form = $(this);
+                	    form.parsley().validate();
+                		if (form.parsley().isValid()){
+                			//document.getElementById("Fform").disabled= "true";
+                			
+                			$("#imageLoader").show();
+
+                			  	this.timer = setTimeout(function () {
+                					$.ajax({
+                		                url: "https://senzwatsonkeys.mybluemix.net/mail/mail.php",
+                		                data: 'product=Evidencer LawEnforcement&fullname='+ $('#fullname').val() +
+                		                '&designation=' + $('#designation').val()+
+                		                '&email=' + $('#email').val()+
+                		                '&company=' + $('#company').val()+
+                		                '&country=' + $('#country').val()+
+                		                '&mobile=' + $('#mobile').val(),
+                			          	 type: 'post',
+                			   			success: function(msg){
+                			   			document.getElementById("mainWrap").innerHTML ='<br><br><label style="color:#fff;margin-left:50px">'+ 
+                                         '   <a href="index.html">'+ 
+                                       ' <font color="white">'+ 
+                                        '   <div class="fa fa-chevron-left"></div>'+ 
+                                       '    Back To Login '+ 
+                                     '   </font>'+ 
+                                    ' </a>'+ 
+                                  '</label>'+ 
+                			        '</div><div style="margin-top:130px"><center><img src="images/loading_white.png" style="height:100px"> '+ 
+                     ' <h4 style="color:#000"><b>Thank you for your interest. <br>Our team will back to you as soon as possible.</b></h4></div><br></center>';
+                						}
+                					
+                					});
+                				}, 200);
+                			  
+                			  	
+                			  	return false;
+                				
+                				
+                		}
+                		
+                		
+                		return false;
+                	 		});
+                			
+                			
+
+                		
+                			
+                			
+                			
+                			
+                	
+                		});
+                		
+                		
+                		function loginPage(){
+                			
+                			
+                			window.location="index.html";
+                			
+                			
+                			
+                			
+                		}
+                	
+                        
+                        </script>
+        
+       
+                     </div>                     <div class="col-lg-6"></div>
+                     
+                  </div>
+               </section>
+            </section>
+            <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen,open" data-target="#nav,html"></a> 
+         </section>
+      </section>
+      </section> </section> <!-- Bootstrap --> 
+      <script src="js/app.v1.js"></script>
+     
+      <script src="js/parsley/parsley.min.js"></script>
+      <script src="js/wizard/jquery.bootstrap.wizard.js"></script>
+      <script src="js/wizard/demo.js"></script> 
+      <script src="js/app.plugin.js"></script>
+   </body>
+</html>

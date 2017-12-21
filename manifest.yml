@@ -1,0 +1,6 @@
+---
+applications:
+- name: Immigration
+  memory: 512M
+  host: immigration
+  domain: mybluemix.net
